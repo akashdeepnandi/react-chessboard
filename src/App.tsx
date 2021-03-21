@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import "./App.css";
 import Chessboard from "chessboardjsx";
 import { ChessInstance, Chess, Square, Move } from "chess.js";
@@ -14,7 +14,6 @@ export const App: React.FC = () => {
   const [fen, setFen] = useState(chess.fen());
   const getSquareStyles = useMemo(() => {
     let styles: any = {};
-    console.log(" iran ");
     highlightedSquares.forEach((square) => {
       styles[square] = {
         backgroundColor: "#7a66ff",
@@ -25,14 +24,12 @@ export const App: React.FC = () => {
   }, [highlightedSquares]);
 
   const onSquareClick = (square: Square) => {
-    const possibleMoves = chess.moves({ square });
+    const possibleMoves = chess.moves({ square, verbose: true });
     let isValidMove = false;
     let squaresToHight: Square[] = [];
     if (possibleMoves.length) {
       squaresToHight = [
-        ...possibleMoves.map((square) =>
-          square.length === 2 ? square : square.substr(square.length - 2)
-        ),
+        ...possibleMoves.map((move) => move.to),
         square,
       ] as Square[];
     } else {
@@ -73,7 +70,10 @@ export const App: React.FC = () => {
         draggable={false}
       />
       {!chess.game_over() && (
-        <h2>{chess.turn() === "w" ? "Player 1's turn" : "Player 2's turn"}</h2>
+        <h2>
+          {chess.turn() === "w" ? "Player 1's turn" : "Player 2's turn"}{" "}
+          {chess.in_check() && ": Check"}
+        </h2>
       )}
       {chess.game_over() && (
         <h1 style={{ color: "#7a66ff" }}>Game over 🥵 🎊</h1>
