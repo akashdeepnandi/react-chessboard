@@ -70,6 +70,7 @@ export const App: React.FC = () => {
         }}
         // @ts-ignore
         squareStyles={getSquareStyles}
+        draggable={false}
       />
       {!chess.game_over() && (
         <h2>{chess.turn() === "w" ? "Player 1's turn" : "Player 2's turn"}</h2>
