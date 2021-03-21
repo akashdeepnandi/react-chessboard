@@ -7,4 +7,4 @@ This is a multiplayer game made using React.js.
 1. Bundler: (rollup.js)[https://rollupjs.org/guide/en/]
 2. Project scaffolding using (Vite)[https://vitejs.dev/]
 
-Deployed on github pages,  [link](https://akashdeepnandi.github.io/react-chessboard/)
+Deployed on [Netlify](https://app.netlify.com/) for automated deployment, [link](https://zealous-wright-affb25.netlify.app/)
